@@ -11,3 +11,7 @@ use piston::event_loop::{EventSettings, Events};
 use piston::input::{RenderArgs, RenderEvent, UpdateArgs, UpdateEvent, ButtonArgs, ButtonEvent, Button, ButtonState, Key};
 use piston::window::WindowSettings;
 use rand::Rng;
+
+enum Direction{
+    Up,Down,Left,Right
+}
