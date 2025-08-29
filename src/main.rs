@@ -15,3 +15,8 @@ use rand::Rng;
 enum Direction{
     Up,Down,Left,Right
 }
+
+pub struct Segment{
+    x: i32,
+    y: i32
+}
