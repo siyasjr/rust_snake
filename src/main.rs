@@ -100,4 +100,21 @@ impl App{
         return false;
     }
 
-    
+     fn change_directions(&mut self, args: &ButtonArgs){
+        if args.state == ButtonState::Press {
+            if args.button == Button::Keyboard(Key::Up) && check_directions(&self.direction, Direction::Up) {
+                self.direction = Direction::Up;
+            }
+            if args.button == Button::Keyboard(Key::Down) && check_directions(&self.direction, Direction::Down) {
+                self.direction = Direction::Down;
+            }
+            if args.button == Button::Keyboard(Key::Left) && check_directions(&self.direction, Direction::Left) {
+                self.direction = Direction::Left;
+            }
+            if args.button == Button::Keyboard(Key::Right) && check_directions(&self.direction, Direction::Right) {
+                self.direction = Direction::Right;
+            }
+
+            
+        }
+    }
