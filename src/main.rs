@@ -31,3 +31,30 @@ pub struct App {
     gameover: bool,
 
 }
+
+impl App{
+    fn render(&mut self, args: &RenderArgs){
+        use graphics::*;
+
+        const GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
+        const BLUE: [f32; 4] = [0.0, 0.0, 1.0, 1.0];
+        const WHITE: [f32; 4] = [1.0, 1.0, 1.0, 1.0];
+
+        let mut square_segments: Vec<[f64; 4]> = Vec::new();
+        for i in &self.segments{
+            let x = i.x as f64;
+            let y = i.y as f64;
+            square_segments.push(rectangle::square(x, y, 10.0));
+        }
+
+        let apple = rectangle::square(self.applex as f64, self.appley as f64, 10.0);
+
+        self.gl.draw(args.viewport(), |c, gl|{
+            clear(WHITE, gl);
+            let transform = c.transform.trans(0.0,0.0).rot_deg(0.0);
+            for i in square_segments {
+                rectangle(BLUE, i, transform, gl);
+            }
+            rectangle(GREEN, apple, transform, gl);
+
+        });
