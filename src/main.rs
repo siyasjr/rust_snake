@@ -20,3 +20,14 @@ pub struct Segment{
     x: i32,
     y: i32
 }
+
+pub struct App {
+    gl: GlGraphics, 
+    segments: Vec<Segment>,
+    direction: Direction,
+    applex: i32,
+    appley: i32,
+    score: u32,
+    gameover: bool,
+
+}
