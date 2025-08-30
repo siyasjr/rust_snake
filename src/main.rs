@@ -159,4 +159,30 @@ fn main() {
         score: 0,
         gameover: false,
     };
+
+    let event_settings = EventSettings::new().ups(15);
+    let mut events = Events::new(event_settings);
+    let mut already_pressed = true;
+    while let Some(e) = events.next(&mut window) {
+        if let Some(args) = e.render_args() {
+            app.render(&args);
+        }
+
+        if let Some(args) = e.update_args() {
+            let newwindowy = windowy + 50;
+            already_pressed = false;
+            app.update(&args, &windowx, &newwindowy);
+        }
+        if app.gameover {
+            println!("Game over! Your score is: {}", app.score);
+            return;
+        }
+        if let Some(args) = e.button_args() {
+            if !(already_pressed) {
+                already_pressed = true;
+                app.change_directions(&args);
+            }
+            
+        }
+    }
 }
