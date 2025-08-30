@@ -149,4 +149,14 @@ fn main() {
         .unwrap();
 
     // Create a new game and run it.
-
+    
+    let mut app = App {
+        gl: GlGraphics::new(opengl),
+        segments: vec![Segment{x:50, y:30}, Segment{x:40, y:30}, Segment{x:30, y:30}],
+        direction: Direction::Right,
+        applex: 200,
+        appley: 30,
+        score: 0,
+        gameover: false,
+    };
+    
