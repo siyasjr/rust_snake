@@ -58,3 +58,5 @@ impl App{
             rectangle(GREEN, apple, transform, gl);
 
         });
+
+    }
