@@ -60,3 +60,42 @@ impl App{
         });
 
     }
+
+    fn update(&mut self, _args: &UpdateArgs, windowx: &u32, windowy: &u32){
+        if self.gameover {
+            return;
+        }
+        if matches!(self.direction, Direction::Up) {
+            self.segments.insert(0, Segment{x: self.segments[0].x, y: self.segments[0].y - 10});
+        }
+        if matches!(self.direction, Direction::Down) {
+            self.segments.insert(0, Segment{x: self.segments[0].x, y: self.segments[0].y + 10});
+        }
+        if matches!(self.direction, Direction::Left) {
+            self.segments.insert(0, Segment{x: self.segments[0].x - 10, y: self.segments[0].y});
+        }
+        if matches!(self.direction, Direction::Right) {
+            self.segments.insert(0, Segment{x: self.segments[0].x + 10, y: self.segments[0].y});
+        }
+        if self.check_if_collision(&windowx, &windowy) {
+            self.gameover = true;
+            return;
+        }
+        if self.segments[0].x == self.applex && self.segments[0].y == self.appley {
+            self.gen_apple_coords(&windowx, &windowy);
+            self.score += 1;
+        } else {
+            self.segments.pop();
+        }
+    }
+    fn check_if_collision(&mut self, windowx: &u32, windowy: &u32) -> bool{
+        if (self.segments[0].x < 0 || self.segments[0].y < 0) || (self.segments[0].x > *windowx as i32 || self.segments[0].y > *windowy as i32) {
+            return true;
+        }
+        for i in 1..self.segments.len() {
+            if self.segments[0].x == self.segments[i].x && self.segments[0].y == self.segments[i].y {
+                return true;
+            }
+        }
+        return false;
+    }
