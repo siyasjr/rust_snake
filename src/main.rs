@@ -118,3 +118,19 @@ impl App{
             
         }
     }
+
+    fn gen_apple_coords(&mut self, windowx: &u32, windowy: &u32){
+        self.applex = round_to_nearest_10(rand::thread_rng().gen_range(0..*windowx as i32));
+        self.appley = round_to_nearest_10(rand::thread_rng().gen_range(0..*windowy as i32));
+        for i in &self.segments{
+            if i.x == self.applex && i.y == self.appley {
+                self.gen_apple_coords(windowx, windowy);
+                break;
+            }
+        }
+    }
+    
+    
+    
+}
+
