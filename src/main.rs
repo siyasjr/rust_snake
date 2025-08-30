@@ -134,3 +134,19 @@ impl App{
     
 }
 
+fn main() {
+    // Change this to OpenGL::V2_1 if not working.
+    let opengl = OpenGL::V3_2;
+    let windowx: u32 = 300;
+    let windowy: u32 = 300;
+
+    // Create a Glutin window.
+    let mut window: Window = WindowSettings::new("Snake", [windowx, windowy])
+        .graphics_api(opengl)
+        .exit_on_esc(true)
+        .resizable(false)
+        .build()
+        .unwrap();
+
+    // Create a new game and run it.
+
